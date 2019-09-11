@@ -19,6 +19,8 @@ app.get("/List", (req, res) => {
             client.close();
             res.send(docs);
         });
+
+        
     });
 }); 
 

@@ -2,14 +2,16 @@
   "name": "portfolioapi",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "API.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node API.js"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "cors": "^2.8.5",
+    "express": "^4.17.1",
     "mongodb": "^3.3.2"
   }
 }
