@@ -10,8 +10,8 @@ app.use(cors());
 const dbName = "PortfolioLeads";
 const ObjectId = require("mongodb").ObjectId;
 
-app.get("/", (req, res) => {
-    MongoClient.connect(url, { useNewUrlParser: true }, function(err, client) {
+app.get("/List", (req, res) => {
+    MongoClient.connect(url, { useNewUrlParser: true, useUnifiedTopology: true }, function(err, client) {
         console.log("Connected to the server");
         const db = client.db(dbName);
         const collection = db.collection("Leads");
@@ -28,12 +28,12 @@ app.post("/", (req, res) => {
         const collection = db.collection("Leads");
         collection.insertMany([
             {
-            firstName: req.body.Firstname,
-            lastName: req.body.Lastname,
+            firstName: req.body.firstName,
+            lastName: req.body.lastName,
             email: req.body.email,
-            phone: req.body.Phone,
+            phone: req.body.phone,
             address: req.body.address,
-            message: req.body.Message
+            message: req.body.message
             }
         ]) 
         client.close();
@@ -45,7 +45,7 @@ app.put("/List/:ID", (req, res) => {
     MongoClient.connect(url, { useNewUrlParser: true }, {useUnifiedTopology: true}, (err, client) => {
         const db = client.db(dbName);
         const collection = db.collection("Leads");
-        collection.find({_id: ObjectId(req.params.ID)})
+        //collection.find({_id: ObjectId(req.params.ID)})
         collection.updateOne({ _id: ObjectId(req.params.ID)}, {$set: req.body});
         client.close();
         res.send("Updated");
@@ -53,10 +53,8 @@ app.put("/List/:ID", (req, res) => {
 
 })
 
-
-
 app.delete("/List/:ID", (req, res) => {
-    MongoClient.connect(url, { useNewUrlParser: true }, function(err, client) {
+    MongoClient.connect(url, { useNewUrlParser: true, useUnifiedTopology: true }, function(err, client) {
         console.log("Connected to the server");
         const db = client.db(dbName);
         const collection = db.collection("Leads");
